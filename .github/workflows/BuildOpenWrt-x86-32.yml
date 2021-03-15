@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 env:
-  REPO_URL: https://github.com/wangxy918/lede
+  REPO_URL: https://github.com/MarkWang2021/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: x86-32.config
