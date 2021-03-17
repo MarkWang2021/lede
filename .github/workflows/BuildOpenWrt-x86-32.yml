@@ -77,7 +77,7 @@ jobs:
         #[ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt
-        make defconfig 
+        #make defconfig 
         echo "Review .config file"
         cat .config
         
