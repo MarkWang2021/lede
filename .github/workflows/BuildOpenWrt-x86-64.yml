@@ -8,13 +8,13 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: BuildOpenWrt x86-64
+name: Build OpenWrt x86-64
 
 on:
   workflow_dispatch:
 
 env:
-  REPO_URL: https://github.com/wangxy918/lede
+  REPO_URL: https://github.com/MarkWang2021/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: x86-64.config
@@ -59,28 +59,27 @@ jobs:
         cd openwrt
         echo "Review custom feeds"
         cat feeds.conf.default
-
+        
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
-
-    - name: Load custom configuration
-      run: |
-        #[ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        cd openwrt
-        make defconfig
-        echo "Review .config file"
-        cat .config
-
+      
     - name: Modify default configuration
       run: |
         echo "Modify default IP to 192.168.1.8"
         cd openwrt
         sed -i 's/192.168.1.1/192.168.1.8/g' package/base-files/files/bin/config_generate
-
+        
+    - name: Load custom configuration
+      run: |
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        cd openwrt
+        #make defconfig 
+        echo "Review .config file"
+        cat .config
+        
     - name: Download package
       id: package
       run: |
