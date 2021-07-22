@@ -11,6 +11,8 @@
 name: Build OpenWrt x86-32
 
 on:
+  schedule:
+    - cron: '0 5 * * 6' 
   workflow_dispatch:
 
 env:
